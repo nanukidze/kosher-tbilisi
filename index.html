@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кошерные продукты в Грузии</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1EF; --surface:#FFFFFF; --ink:#18262E; --muted:#5B6B73; --line:#D5DDDA;
+  --green:#1F6B57; --green-soft:#DCEDE6; --amber:#8A6100; --amber-soft:#FBEFC9;
+  --blue:#2D5B8A; --blue-soft:#DFE9F4; --red:#9A3B3B; --red-soft:#F5E1E1;
+  --chip:#E2E8E6;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121A1E; --surface:#1A252B; --ink:#E6EDEA; --muted:#9AABB2; --line:#2B3A41;
+    --green:#6CC4A6; --green-soft:#1D3A32; --amber:#E7BE5C; --amber-soft:#3A3018;
+    --blue:#8DB6E0; --blue-soft:#1E3045; --red:#E59A9A; --red-soft:#3E2424;
+    --chip:#24323A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121A1E; --surface:#1A252B; --ink:#E6EDEA; --muted:#9AABB2; --line:#2B3A41;
+  --green:#6CC4A6; --green-soft:#1D3A32; --amber:#E7BE5C; --amber-soft:#3A3018;
+  --blue:#8DB6E0; --blue-soft:#1E3045; --red:#E59A9A; --red-soft:#3E2424;
+  --chip:#24323A; color-scheme:dark;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 150px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header.top{padding:20px 0 8px}
+.langs{display:flex;justify-content:flex-end;gap:4px;margin-bottom:10px}
+.lang{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:transparent;color:var(--muted);padding:5px 10px;border-radius:8px;cursor:pointer}
+.lang[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lang:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+h1{font-family:"Unbounded","Golos Text",system-ui,sans-serif;font-weight:700;font-size:clamp(26px,6vw,38px);line-height:1.1;margin:0 0 8px;letter-spacing:-.01em}
+.lede{color:var(--muted);margin:0;max-width:60ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line)}
+.search{position:relative}
+.search input{width:100%;font:inherit;font-size:18px;padding:14px 46px 14px 16px;border:2px solid var(--ink);border-radius:14px;background:var(--surface);color:var(--ink);outline:none}
+.search input:focus-visible{border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+.clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);font-size:22px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:none}
+.clear.show{display:block}
+.clear:focus-visible{outline:2px solid var(--green)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font:inherit;font-size:14px;border:1px solid transparent;background:var(--chip);color:var(--ink);padding:7px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.chip:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;padding-top:8px}
+.toggle{font:inherit;font-size:13px;border:1px dashed var(--line);background:transparent;color:var(--muted);padding:5px 10px;border-radius:8px;cursor:pointer}
+.toggle[aria-pressed="true"]{border-style:solid;border-color:var(--green);color:var(--green);background:var(--green-soft)}
+.toggle:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.count{font-size:13px;color:var(--muted);padding:12px 0 0}
+section.group{margin:22px 0 8px}
+section.group h2{font-family:"Unbounded","Golos Text",system-ui,sans-serif;font-weight:500;font-size:18px;margin:0 0 6px;display:flex;align-items:baseline;gap:8px}
+section.group h2 span{font-family:"Golos Text",system-ui,sans-serif;font-size:13px;color:var(--muted);font-weight:400}
+ul.items{list-style:none;margin:0;padding:0;background:var(--surface);border-radius:12px;border:1px solid var(--line)}
+ul.items li{padding:14px 16px;border-top:1px solid var(--line)}
+ul.items li:first-child{border-top:0}
+.name{font-weight:600;font-size:17px;margin:0}
+.brand{color:var(--muted);font-weight:500}
+.details{margin:4px 0 0;font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:12.5px;padding:3px 8px;border-radius:6px;line-height:1.35}
+.t-seal{background:var(--amber-soft);color:var(--amber);font-weight:600}
+.t-warn{background:var(--red-soft);color:var(--red);font-weight:600}
+.t-dairy{background:var(--blue-soft);color:var(--blue)}
+.t-meat{background:var(--red-soft);color:var(--red)}
+.t-parve{background:var(--green-soft);color:var(--green)}
+.t-chabad{background:var(--green);color:var(--surface);font-weight:600}
+.src{font-size:12px;color:var(--muted);margin-top:6px}
+.src a,.details a{color:var(--green)}
+mark{background:var(--amber-soft);color:inherit;border-radius:3px;padding:0 1px}
+.empty{padding:40px 8px;text-align:center;color:var(--muted)}
+.empty strong{display:block;color:var(--ink);font-size:18px;margin-bottom:6px}
+.rules{margin:36px 0 12px;padding:18px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.rules h2{font-family:"Unbounded","Golos Text",system-ui,sans-serif;font-weight:500;font-size:18px;margin:0 0 10px}
+.rules dl{margin:0}
+.rules dt{font-weight:600;margin-top:10px}
+.rules dd{margin:2px 0 0;color:var(--muted)}
+footer{font-size:13px;color:var(--muted);padding:12px 0 40px}
+footer a{color:var(--green)}
+@media (prefers-reduced-motion:no-preference){ul.items li{transition:background .15s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="langs" role="group" aria-label="Язык / Language">
+      <button class="lang" data-l="ru" lang="ru">Русский</button>
+      <button class="lang" data-l="en" lang="en">English</button>
+    </div>
+    <h1 id="t-title"></h1>
+    <p class="lede" id="t-lede"></p>
+  </header>
+
+  <div class="bar">
+    <div class="search">
+      <input id="q" type="search" autocomplete="off">
+      <button class="clear" id="clear">×</button>
+    </div>
+    <div class="chips" id="chips" role="toolbar"></div>
+    <div class="filters">
+      <button class="toggle" id="fChabad" aria-pressed="false"></button>
+      <button class="toggle" id="fNoSeal" aria-pressed="false"></button>
+    </div>
+  </div>
+
+  <div class="count" id="count" aria-live="polite"></div>
+  <main id="list"></main>
+
+  <aside class="rules" id="t-rules"></aside>
+
+  <footer id="t-foot"></footer>
+</div>
+
+<script>
+const CATS = ["drinks","alcohol","hot","oil","fish","canned","sauces","dry","cereal","sweets","plant","dairy","meat","general"];
+const C = "Хабад", O = "Olami", M = "Московский раввинский суд";
+const OLAMI = {sauces:"https://olami.ge/sauces",canned:"https://olami.ge/sauces_3",general:"https://olami.ge/sauces_3",sweets:"https://olami.ge/sweets"};
+const LINKS = {"Хабад":"https://chabadtbilisi.ge/en/food/57/","Московский раввинский суд":"https://kasher.ru/index.php?Itemid=62&catid=39%3A2011-07-11-16-17-07&id=64%3A2011-07-11-17-17-33&option=com_content&view=article"};
+const srcUrl = (s,p) => s===O ? (OLAMI[p.c]||"https://olami.ge/kosher_in_georgia") : LINKS[s];
+const GRR = "Главного раввината России";
+const P = [
+ {c:"drinks",n:"Любая натуральная вода",d:"Без вкусовых добавок.",s:[O],k:"вода питьевая негазированная"},
+ {c:"drinks",n:"Газированная минеральная вода",b:"Borjomi, Nabeghlavi, Kobi и другие",s:[O],k:"боржоми набеглави коби минералка газированная вода"},
+ {c:"drinks",n:"Лимонады",b:"Zedazeni",d:"Груша, лимон, тархун (в обоих списках); ваниль (Хабад); саперави, «Крем» (Olami).",s:[C,O],k:"зедазени газировка лимонад тархун груша саперави крем ваниль"},
+ {c:"drinks",n:"Лимонады",b:"Zandukeli",d:"Груша, тархун.",s:[O],k:"зандукели лимонад груша тархун"},
+ {c:"drinks",n:"Соки",b:"Chero",d:"Гранатовый, яблоко-вишня, апельсиновый, мультифрукт.",s:[O],k:"черо сок гранатовый яблочный вишневый апельсиновый"},
+ {c:"drinks",n:"Соки",b:"Campa",d:"Мультифрукт, вишня-гранат.",seal:"любой знак кашрута",s:[O],k:"кампа сок мультифрукт вишня гранат"},
+ {c:"drinks",n:"Pepsi, Pepsi Max, 7Up",b:"PepsiCo",s:[C,O],k:"пепси макс севен ап 7ап газировка"},
+ {c:"drinks",n:"Coca-Cola, Coca-Cola Zero, Sprite, Fanta",b:"Coca-Cola",s:[O],k:"кока кола зеро спрайт фанта газировка"},
+ {c:"drinks",n:"Виноградный сок натуральный",b:"Yekvei Zion",d:"187 мл.",shop:1,s:[C],k:"йекви цион сок виноградный кидуш"},
+ {c:"alcohol",n:"Водка без пищевых добавок",d:"Считается кошерной.",warn:"В водку иногда добавляют молочные компоненты — проверяйте состав",s:[O],k:"водка"},
+ {c:"alcohol",n:"Водка Absolut",b:"Absolut",d:"Absolut (классическая), Mandrin, Pears, Kurant, Citron, Peppar, Raspberri, Vanilia.",s:[O],k:"абсолют водка"},
+ {c:"alcohol",n:"Водка Finlandia",b:"Finlandia",d:"Обычная, без добавок.",s:[C],k:"финляндия водка"},
+ {c:"alcohol",n:"Водка Russian Standard",b:"Russian Standard",d:'Кошерные вкусы — <a href="https://kosher.ru/public/catalog/vodka?brands%5B%5D=46" target="_blank" rel="noopener">в каталоге kosher.ru</a>.',s:[C],k:"русский стандарт водка"},
+ {c:"alcohol",n:"Водка Beluga",b:"Beluga",d:'Кошерные вкусы — <a href="https://kosher.ru/public/catalog/vodka?brands%5B%5D=512" target="_blank" rel="noopener">в каталоге kosher.ru</a>.',s:[C],k:"белуга водка"},
+ {c:"alcohol",n:"Ликёр Baileys Original Irish Cream",b:"Baileys",st:"dairy",hn:1,s:[O],k:"бейлис ликер сливочный"},
+ {c:"alcohol",n:"Ликёры Drambuie",b:"Drambuie",d:"Drambuie, Black Ribbon, The Royal Legacy of 1745.",seal:"MK Manchester",s:[O],k:"драмбуи ликер"},
+ {c:"alcohol",n:"Ликёры Cointreau, Disaronno Amaretto, Dettling",b:"Cointreau, Disaronno, Dettling",s:[O],k:"куантро дисаронно амаретто деттлинг ликер"},
+ {c:"alcohol",n:"Ликёр Wild Turkey American Honey",b:"Wild Turkey",warn:"Только если дата, выгравированная внизу на задней стороне бутылки, позже 15.05.2023",s:[O],k:"вайлд тёрки американ хани ликер виски мед"},
+ {c:"alcohol",n:"Ликёры Luxardo",b:"Luxardo",d:"Лимончелло, вишнёвый, яблочный, эспрессо.",seal:"обязательно указание кашрута",s:[O],k:"луксардо лимончелло ликер"},
+ {c:"alcohol",n:"Ирландский виски",b:"Jameson, Powers, Bushmills, Midleton, Paddy, Tullamore Dew",d:"Jameson: Irish Whiskey, Gold Reserve, 12 Distillery Reserve, 12 Special Reserve, 18. Powers: Gold Label, Gold Label 12. Bushmills: Original, Black Bush, 10 Malt, 1608 46%. Midleton Very Rare. Paddy. Tullamore Dew: Original, Heritage Blend, 10 Single Malt, 10 Old Reserve, 12 Special Reserve.",s:[O],k:"джеймсон пауэрс бушмилс мидлтон падди талламор виски ирландский"},
+ {c:"alcohol",n:"Американский и канадский виски",b:"Jack Daniel's, Crown Royal, Canadian Club, Baker's, Basil Hayden, Booker's",d:"Jack Daniel's: Black Label, Gentleman Jack, Single Barrel. Crown Royal. Canadian Club: Classic, 10 Year Reserve, обычный. Baker's. Basil Hayden. Booker's.",s:[O],k:"джек дэниелс краун роял канадиан клаб бейкерс бэзил хейден букерс виски бурбон"},
+ {c:"alcohol",n:"Виски Tomintoul",b:"Tomintoul",d:"10, 16, 33 года, Peaty Tang.",s:[O],k:"томинтул tomintul виски"},
+ {c:"alcohol",n:"Вина",b:"Yekvei Zion",d:"«Эцион» — белое сухое 12%; «Долев» — белое полусухое 11,5% (Эмералд Рислинг); «Калиль» — красное сладкое 4%; «Ацилим» — красное сладкое 12%.",shop:1,s:[C],k:"йекви цион вино эцион долев калиль ацилим кидуш"},
+ {c:"hot",n:"Любой чёрный или зелёный чай",d:"Без ароматизаторов и добавок — считается кошерным.",s:[C,O],k:"чай черный зеленый"},
+ {c:"hot",n:"Чай",b:"Greenfield",d:'Много вкусов. <a href="https://kosher.ru/public/catalog/goryachie-napitki?brands%5B%5D=218" target="_blank" rel="noopener">Список кошерных вкусов</a>.',seal:GRR,s:[C,O],k:"гринфилд чай"},
+ {c:"hot",n:"Чай",b:"Azercay",s:[O],k:"азерчай азерчай чай"},
+ {c:"hot",n:"Чай",b:"Dilmah",seal:"любой знак кашрута",s:[O],k:"дилма чай"},
+ {c:"hot",n:"Кофе без добавок",d:"Растворимый, в зёрнах, молотый — без сухого молока и ароматизаторов считается кошерным.",warn:"Пакетики «3 в 1» — некошерные. Кофе с карамелью, шоколадом и т. п. — только с сертификатом",s:[C,O],k:"кофе растворимый молотый зерновой 3в1"},
+ {c:"hot",n:"Кофе",b:"Tchibo",d:"Exclusive, Exclusive Decaf, Family, Feine Milde, Gold Selection, Gold Selection Crema, Black & White, Black & White Crema, Sana, Barista Classic, Barista Espresso Style.",s:[O],k:"чибо кофе эксклюзив фэмили голд барista"},
+ {c:"oil",n:"Подсолнечное масло",b:"Oleina",s:[C],k:"олейна масло подсолнечное"},
+ {c:"oil",n:"Подсолнечное масло",b:"Divnoe",s:[C],k:"дивное масло подсолнечное"},
+ {c:"oil",n:"Подсолнечное масло",b:"Sloboda",s:[C],k:"слобода масло подсолнечное"},
+ {c:"oil",n:"Оливковое масло холодного отжима",b:"La Española",seal:"OU",s:[C],k:"ла эспаньола оливковое масло"},
+ {c:"fish",n:"Сардины в масле",b:"Gamma",s:[C],k:"гамма сардины рыба консервы"},
+ {c:"fish",n:"Как покупать свежую рыбу",d:'Целую рыбу можно покупать без проблем. Если рыбу режут в магазине, лучше попросить хорошо вымыть нож; если нет — тщательно вымыть рыбу дома (на ноже может остаться жир некошерной рыбы). Списки: <a href="https://www.chabad.org/library/article_cdo/aid/82675/jewish/Kosher-Fish-List.htm" target="_blank" rel="noopener">кошерная рыба</a>, <a href="https://www.chabad.org/library/article_cdo/aid/2998673/jewish/Non-Kosher-Fish-List.htm" target="_blank" rel="noopener">некошерная рыба</a>.',s:[O],k:"рыба свежая нож разделка чешуя"},
+ {c:"fish",n:"Рыбная продукция St James / Scotch Reserve",b:"St James, Scotch Reserve",seal:"KLBD",s:[O],k:"сент джеймс скотч резерв лосось семга"},
+ {c:"fish",n:"Красная икра",b:"Русское море",warn:"Только натуральная, не имитация",d:"Также можно купить в кошерном магазине при Большой синагоге.",s:[O],k:"russkoe more русское море икра красная"},
+ {c:"canned",n:"Оливки",b:"Iberica",d:"С косточкой или без косточки.",warn:"Только без начинки",s:[C],k:"иберика оливки маслины"},
+ {c:"canned",n:"Томаты резаные",b:"Rossana",s:[C],k:"россана помидоры томаты"},
+ {c:"canned",n:"Томатная паста",b:"Rossana, Kingtom, Reggia",d:"Rossana — производство Италии.",s:[C,O],k:"россана кингтом реджиа томатная паста"},
+ {c:"canned",n:"Соленья",b:"Saville",d:"Огурцы, ассорти, грибы, грибы с овощами, резаные грибы.",s:[O],k:"савиль соленья огурцы грибы маринованные"},
+ {c:"canned",n:"Консервация",b:"Saville",d:"Виноградные листья, очищенные томаты, гранатовый сок, органический гранатовый сок.",s:[O],k:"савиль виноградные листья долма томаты гранатовый сок"},
+ {c:"canned",n:"Кукуруза, горошек, стручковая фасоль",b:"Bonduelle",s:[O],k:"бондюэль кукуруза горошек фасоль"},
+ {c:"canned",n:"Продукция Melis",b:"Melis",seal:"любой знак кашрута",s:[O],k:"мелис"},
+ {c:"canned",n:"Соленья",b:"Marneuli",d:"Огуречно-томатное ассорти, маринованные огурцы, маринованные томаты, черри в маринаде.",s:[O],k:"марнеули соленья огурцы помидоры черри"},
+ {c:"canned",n:"Сиропы 1883",b:"1883",seal:"любой знак кашрута",s:[O],k:"сироп 1883"},
+ {c:"fish",n:"Шпроты рижские",d:"Без добавок.",s:[O],k:"шпроты рыба рижские"},
+ {c:"sauces",n:"Джемы",b:"Mahaeev",d:'Лесные ягоды, лимон, персик, лимон-имбирь, черника, персик-манго, клубника, киви-мята. <a href="https://kosher.ru/public/catalog" target="_blank" rel="noopener">Фото всех вкусов</a>.',s:[C],k:"махеев джем варенье"},
+ {c:"sauces",n:"Варенье",b:"Marneuli",d:"Айва, мандарин, грецкий орех, вишня, бали (сорт вишни).",warn:"Вишню проверять на червей",s:[O],k:"марнеули варенье айва мандарин орех вишня"},
+ {c:"sauces",n:"Горчица по-русски",b:"Mahaeev",s:[C],k:"махеев горчица"},
+ {c:"sauces",n:"Майонез",b:"Sloboda",d:"С омега 3-6-9; на перепелиных яйцах; с 67% оливкового масла; «Олива»; «Провансаль классический».",s:[C,O],k:"слобода майонез провансаль олива"},
+ {c:"sauces",n:"Кетчуп",b:"Sloboda",d:"Томатный, барбекю, острый, лечо.",s:[O],k:"слобода кетчуп"},
+ {c:"sauces",n:"Соевый соус",b:"Kikkoman",d:"Соевый соус, сладкий соевый соус.",s:[O],k:"киккоман соевый соус"},
+ {c:"sauces",n:"Томатная паста, соус из свежих томатов",b:"Marneuli",warn:"Соус — только из свежих томатов",s:[O],k:"марнеули томатная паста соус"},
+ {c:"sauces",n:"Продукция Astoria",b:"Astoria",seal:"любой знак кашрута",s:[O],k:"астория соус"},
+ {c:"sauces",n:"Табаско",b:"McIlhenny",seal:"любой знак кашрута",s:[O],k:"табаско tabasco острый соус"},
+ {c:"sauces",n:"Соус барбекю Original, Hickory Smoke",b:"Kraft",seal:"любой знак кашрута",s:[O],k:"крафт барбекю"},
+ {c:"sauces",n:"Кетчуп",b:"Heinz",seal:"любой знак кашрута",s:[O],k:"хайнц кетчуп"},
+ {c:"sauces",n:"Наршараб",b:"Saville",s:[O],k:"савиль наршараб гранатовый соус"},
+ {c:"dry",n:"Макароны и паста",b:"Reggia",d:"Разные формы и размеры.",seal:"OU",s:[C,O],k:"реджиа макароны паста лапша"},
+ {c:"dry",n:"Макароны и паста",b:"Divella",seal:"любой знак кашрута",s:[O],k:"дивелла макароны паста"},
+ {c:"dry",n:"Макароны и паста",b:"Makfa",d:"Разные формы и размеры.",seal:GRR,s:[C],k:"макфа макароны паста лапша"},
+ {c:"dry",n:"Крупяные смеси и смеси для супа",b:"Yelli",d:'<a href="https://kosher.ru/catalog/sousy-spetsii-suhie-supy-mayonez?brands%5B%5D=154" target="_blank" rel="noopener">Полный список продуктов</a>.',seal:GRR,s:[C],k:"елли йелли крупа суп смесь"},
+ {c:"dry",n:"Соль и сахар",d:"Без добавок — считаются кошерными.",s:[C,O],k:"соль сахар"},
+ {c:"cereal",n:"Хлопья для завтрака",b:"Kellogg's",d:"Знак обычно сбоку упаковки.",seal:"MK",warn:"Не все вкусы — только с пометкой",s:[C,O],k:"келлогс хлопья завтрак"},
+ {c:"sweets",n:"Козинаки и халва",b:"Azovskaya",d:"Козинаки: арахисовый, подсолнечный, кунжутный (с мёдом). Халва: подсолнечная, подсолнечная с арахисом; на фруктозе — арахисовая, подсолнечная, тахинно-арахисовая. В любой упаковке.",st:"parve",s:[C,O],k:"азовская козинак гозинаки халва фруктоза"},
+ {c:"sweets",n:"Халва «Ахва»",d:"Шоколад-ваниль, 50 г.",shop:1,s:[C],k:"халва ахва"},
+ {c:"sweets",n:"Шоколад",b:"Millennium",st:"dairy",hs:1,seal:"любой знак кашрута",s:[O],k:"миллениум шоколад"},
+ {c:"sweets",n:"Шоколад",b:"Любимов",st:"dairy",hs:1,seal:"любой знак кашрута",s:[O],k:"lubimov любимов шоколад"},
+ {c:"sweets",n:"Шоколад",b:"Cachet",st:"dairy",hs:1,seal:"любой знак кашрута",s:[O],k:"кашет шоколад"},
+ {c:"sweets",n:"Конфеты и шоколад",b:"Бабаевский",d:"Белочка; оригинальный с фундуком и какао; Кот-д'Ивуар и Уганда в тёмном шоколаде; с миндалём и ореховым кремом; с апельсином и миндалём; с черносливом; с фундуком; элитный 75% какао и другие.",st:"dairy",hs:1,seal:"любой знак кашрута",s:[O],k:"babaevsky бабаевский белочка шоколад конфеты"},
+ {c:"sweets",n:"Toblerone",b:"Kraft",d:"Dark, Fruit & Nut, Honeycomb Crisp, Milk, Tinys, White.",st:"dairy",hs:1,s:[O],k:"тоблерон шоколад"},
+ {c:"sweets",n:"Конфеты и шоколад",b:"Ferrero",d:"Nutella, Duplo, Ferrero Küsschen, Giotto, Hanuta, Hanuta Mini, Raffaello, Rocher, Pocket Coffee, Yogurette. Kinder: Country, Friends, Happy Hippo Cacao и Crocki, Riegel Maxi, Schoko-Bons, Schokolade, Schokolade Mini, Bueno, Chocofresh, Maxi King, Überraschung (Киндер-сюрприз).",st:"dairy",hs:1,warn:"Только европейского производства (Германия, Польша и т. д.)",s:[O],k:"ферреро нутелла киндер буэно сюрприз рафаэлло роше дупло джотто ханута"},
+ {c:"sweets",n:"Шоколад",b:"Ritter Sport",d:"100 г: Dunkle Voll-Nuss, Edel Bitter, Espresso, Ganze Mandel, Halbbitter, Kakao Mousse, Knusperflakes, Knuspercakes, Kokos, Marzipan, Nougat, Trauben Nuss, Voll-Nuss, Weisse Voll-Nuss. 250 г: Alpenmilch, Voll-Nuss. Mini: Alpenmilch, Edel Vollmilch, Haselnuss, Joghurt, Knusper Flakes, Knusperkeks, Marzipan, Nugat.",st:"dairy",hs:1,warn:"Только производства Германии",s:[O],k:"риттер спорт шоколад марципан"},
+ {c:"sweets",n:"Батончики",b:"Mars",d:"Mars, Snickers, Twix, Milky Way (и их Minis), Bounty, Maltesers Maxipak.",st:"dairy",hs:1,warn:"Только производства Нидерландов, Польши, Великобритании, Ирландии, Германии",s:[O],k:"марс сникерс твикс баунти милки вэй мальтизерс батончик"},
+ {c:"sweets",n:"Печенье",b:"Walkers",st:"dairy",hs:1,seal:"любой знак кашрута",s:[O],k:"уолкерс печенье шортбред"},
+ {c:"sweets",n:"Печенье",b:"Bahlsen",d:"Hit: Choco, Vanilla, Minis Cocoa, Coco, Nuts, Salted Caramel. Leibniz: Original, Minis Original, Minis Choco, Zoo Original, Zoo Cocoa.",st:"dairy",hs:1,warn:"Только производства Польши",s:[O],k:"бальзен хит лейбниц печенье"},
+ {c:"sweets",n:"Злаковые батончики",b:"Corny",st:"dairy",hs:1,seal:"любой знак кашрута",s:[O],k:"корни батончик мюсли"},
+ {c:"sweets",n:"Жвачка Orbit",b:"Orbit",st:"parve",warn:"Только производства Польши",s:[O],k:"орбит жвачка жевательная резинка"},
+ {c:"sweets",n:"Жвачка Airwaves, Orbit, Hubba Bubba, Extra",b:"Wrigley",seal:"логотип KF или код, начинающийся с 01 или 50, либо содержащий 1KF",s:[O],k:"эирвейвс орбит хубба бубба экстра жвачка жевательная резинка"},
+ {c:"sweets",n:"Шоколад Lindt — парве",b:"Lindt",d:"Excellence Dark 70%, 85%, 90%, 99%.",st:"parve",s:[O],k:"линдт шоколад горький темный"},
+ {c:"sweets",n:"Шоколад Lindt — молочный",b:"Lindt",d:"Excellence: Dark Chilli, Dark Intense Mint, Dark Intense Orange, Dark Sea Salt, Milk Crunchy Caramel, Milk Extra Creamy, White. Lindor Bar Milk. Swiss Classic Milk и Milk Double.",st:"dairy",hs:1,s:[O],k:"линдт шоколад молочный линдор"},
+ {c:"sweets",n:"Мороженое",b:"Häagen-Dazs, Ben & Jerry's",st:"dairy",hs:1,seal:"любой знак кашрута",s:[O],k:"хааген даз бен джерри мороженое"},
+ {c:"sweets",n:"Мороженое",b:"Brand Ice (бывш. Baskin Robbins)",d:"Ваниль, шоколад, миндаль-фисташка.",st:"dairy",hs:1,warn:"Только в фабричной упаковке",s:[O],k:"бренд айс баскин роббинс мороженое"},
+ {c:"plant",n:"Соевый десерт",b:"Alpro",d:"Шоколад, ваниль, карамель.",warn:"Только европейского производства",s:[C],k:"алпро соевый десерт пудинг"},
+ {c:"plant",n:"Растительное молоко",b:"Alpro",d:"Соевое: ваниль, ваниль лайт, шоко, шоко лайт, банан, оригинал, био. Также кокос-миндаль, кешью, рисовое.",warn:"Только европейского производства",s:[C],k:"алпро соевое молоко кокосовое миндальное кешью рисовое"},
+ {c:"plant",n:"Растительные сливки",b:"Monna Lisa",shop:1,s:[C],k:"монна лиза сливки взбитые"},
+ {c:"dairy",n:"Твёрдые сыры сулугуни и имерули",d:"Специальное кошерное производство. Продаются в часы работы Бейт Хабада.",st:"dairy",shop:1,s:[C],k:"сыр сулугуни имерули имерули"},
+ {c:"dairy",n:"Сливки, молоко, мацони, сметана",b:"Soflis Nobati",d:"Сливки для взбивания 33%, 20%. Линейка «Из печи»: молоко, мацони, сметана.",st:"dairy",hs:1,s:[O],k:"софлис нобати сливки молоко мацони сметана из печи"},
+ {c:"dairy",n:"Сливки для взбивания, сливочное масло",b:"President",st:"dairy",hs:1,s:[O],k:"президент сливки масло сливочное"},
+ {c:"dairy",n:"Мацони, творог, молоко",b:"Sante",d:"Мацони процеженный 0%, 6%. Творог 0%. Молоко 2,5%, 3,2%.",st:"dairy",hs:1,s:[O],k:"санте мацони творог молоко"},
+ {c:"dairy",n:"Масло, сметана, творог, молоко",b:"Santino",d:"Сливочное масло 82%. Сметана 15%, 20%. Творог 0%, 6%. Молоко 2,5%, 3,2%.",st:"dairy",hs:1,s:[O],k:"сантино масло сливочное сметана творог молоко"},
+ {c:"dairy",n:"Творог",b:"Простоквашино (Данон Россия)",d:"Актуальность подтвердил Бейт Дин России, октябрь 2026. Массовая доля жира 2%, 5%, 9%.",st:"dairy",hs:1,s:[M],k:"простоквашино prostokvashino danone данон творог"},
+ {c:"dairy",n:"Сметана",b:"Простоквашино (Данон Россия)",d:"Актуальность подтвердил Бейт Дин России, октябрь 2026. Классическая 10%, 15%, 20%, 25%; маложирная 15%.",st:"dairy",hs:1,s:[M],k:"простоквашино prostokvashino danone данон сметана"},
+ {c:"dairy",n:"Молоко",b:"Простоквашино (Данон Россия)",d:"Актуальность подтвердил Бейт Дин России, октябрь 2026. Отборное пастеризованное 3,4–6%; пастеризованное 2,5%; УВТ стерилизованное 1,5%, 2,5%, 3,2%, 3,5%, 6%.",st:"dairy",hs:1,s:[M],k:"простоквашино prostokvashino danone данон молоко"},
+ {c:"dairy",n:"Кефир",b:"Простоквашино (Данон Россия)",d:"Актуальность подтвердил Бейт Дин России, октябрь 2026. Маложирный 2,5%; классический 3,2%.",st:"dairy",hs:1,s:[M],k:"простоквашино prostokvashino danone данон кефир"},
+ {c:"meat",n:"Аргентинская говядина",d:"Антрекот № 1.",st:"meat",shop:1,s:[C],k:"мясо говядина антрекот"},
+ {c:"general",n:"Замороженные овощи",d:"Можно все, кроме смесей.",warn:"Смеси с картофелем — только с сертификатом; смеси с рисом — некошерные",s:[O],k:"заморозка замороженные овощи картофель"},
+ {c:"general",n:"Сухофрукты",d:"Изюм, курага, финики, инжир и т. п. без добавок — кошерные.",warn:"Цукаты и смеси — только с сертификатом",s:[O],k:"сухофрукты изюм курага финики инжир цукаты"},
+ {c:"general",n:"Орехи фабричной фасовки",d:"Без добавок — обычно кошерные.",s:[O],k:"орехи"}
+];
+
+const ANY="any kashrut symbol", RR="Chief Rabbinate of Russia";
+const EN = [
+ {n:"Any natural water",d:"Without flavorings."},
+ {n:"Sparkling mineral water",b:"Borjomi, Nabeghlavi, Kobi and others"},
+ {n:"Lemonades",d:"Pear, lemon, tarragon (both lists); vanilla (Chabad); Saperavi, Cream (Olami)."},
+ {n:"Lemonades",d:"Pear, tarragon."},
+ {n:"Juices",d:"Pomegranate, apple-cherry, orange, mixed fruit."},
+ {n:"Juices",d:"Mixed fruit, cherry-pomegranate.",se:ANY},
+ {n:"Pepsi, Pepsi Max, 7Up"},
+ {n:"Coca-Cola, Coca-Cola Zero, Sprite, Fanta"},
+ {n:"Natural grape juice",d:"187 ml."},
+ {n:"Vodka without food additives",d:"Considered kosher.",w:"Vodka sometimes contains dairy additives — check the ingredients"},
+ {n:"Absolut vodka",d:"Absolut (original), Mandrin, Pears, Kurant, Citron, Peppar, Raspberri, Vanilia."},
+ {n:"Finlandia vodka",d:"Plain, no additives."},
+ {n:"Russian Standard vodka",d:'Kosher flavors are in the <a href="https://kosher.ru/public/catalog/vodka?brands%5B%5D=46" target="_blank" rel="noopener">kosher.ru catalog</a>.'},
+ {n:"Beluga vodka",d:'Kosher flavors are in the <a href="https://kosher.ru/public/catalog/vodka?brands%5B%5D=512" target="_blank" rel="noopener">kosher.ru catalog</a>.'},
+ {n:"Baileys Original Irish Cream liqueur"},
+ {n:"Drambuie liqueurs",d:"Drambuie, Black Ribbon, The Royal Legacy of 1745."},
+ {n:"Cointreau, Disaronno Amaretto, Dettling liqueurs"},
+ {n:"Wild Turkey American Honey liqueur",w:"Only if the date engraved at the bottom of the back of the bottle is after 15 May 2023"},
+ {n:"Luxardo liqueurs",d:"Limoncello, cherry, apple, espresso.",se:"kashrut must be stated"},
+ {n:"Irish whiskey",d:"Jameson: Irish Whiskey, Gold Reserve, 12 Distillery Reserve, 12 Special Reserve, 18. Powers: Gold Label, Gold Label 12. Bushmills: Original, Black Bush, 10 Malt, 1608 46%. Midleton Very Rare. Paddy. Tullamore Dew: Original, Heritage Blend, 10 Single Malt, 10 Old Reserve, 12 Special Reserve."},
+ {n:"American and Canadian whiskey",d:"Jack Daniel's: Black Label, Gentleman Jack, Single Barrel. Crown Royal. Canadian Club: Classic, 10 Year Reserve, regular. Baker's. Basil Hayden. Booker's."},
+ {n:"Tomintoul whisky",d:"10, 16, 33 years, Peaty Tang."},
+ {n:"Wines",d:"Etzion — dry white 12%; Dolev — semi-dry white 11.5% (Emerald Riesling); Kalil — sweet red 4%; Atzilim — sweet red 12%."},
+ {n:"Any black or green tea",d:"Without flavorings or additives — considered kosher."},
+ {n:"Tea",d:'Many flavors. <a href="https://kosher.ru/public/catalog/goryachie-napitki?brands%5B%5D=218" target="_blank" rel="noopener">List of kosher flavors</a>.',se:RR},
+ {n:"Tea"},
+ {n:"Tea",se:ANY},
+ {n:"Coffee without additives",d:"Instant, beans, ground — without milk powder or flavorings it is considered kosher.",w:"3-in-1 sachets are not kosher. Coffee with caramel, chocolate etc. — only with a certificate"},
+ {n:"Coffee"},
+ {n:"Sunflower oil"},{n:"Sunflower oil"},{n:"Sunflower oil"},
+ {n:"Cold-pressed olive oil"},
+ {n:"Sardines in oil"},
+ {n:"Buying fresh fish",d:'Whole fish can be bought without any problem. If the fish is cut in the shop, ask them to wash the knife well; if not, wash the fish thoroughly at home (fat from non-kosher fish may remain on the knife). Lists: <a href="https://www.chabad.org/library/article_cdo/aid/82675/jewish/Kosher-Fish-List.htm" target="_blank" rel="noopener">kosher fish</a>, <a href="https://www.chabad.org/library/article_cdo/aid/2998673/jewish/Non-Kosher-Fish-List.htm" target="_blank" rel="noopener">non-kosher fish</a>.'},
+ {n:"St James / Scotch Reserve fish products"},
+ {n:"Red caviar",b:"Russkoe More",w:"Natural only, no imitation",d:"Can also be bought at the kosher shop at the Great Synagogue."},
+ {n:"Olives",d:"With or without pits.",w:"Unstuffed only"},
+ {n:"Chopped tomatoes"},
+ {n:"Tomato paste",d:"Rossana — made in Italy."},
+ {n:"Pickles",d:"Cucumbers, mixed, mushrooms, mushrooms with vegetables, chopped mushrooms."},
+ {n:"Preserves",d:"Grape leaves, peeled tomatoes, pomegranate juice, organic pomegranate juice."},
+ {n:"Corn, peas, green beans"},
+ {n:"Melis products",se:ANY},
+ {n:"Pickles",d:"Cucumber and tomato mix, pickled cucumbers, pickled tomatoes, pickled cherry tomatoes."},
+ {n:"1883 syrups",se:ANY},
+ {n:"Riga sprats",d:"Without additives."},
+ {n:"Jams",d:'Forest berries, lemon, peach, lemon-ginger, blueberry, peach-mango, strawberry, kiwi-mint. <a href="https://kosher.ru/public/catalog" target="_blank" rel="noopener">Photos of all flavors</a>.'},
+ {n:"Jams",d:"Quince, mandarin, walnut, cherry, bali (a kind of cherry).",w:"Check cherries for worms"},
+ {n:"Russian-style mustard"},
+ {n:"Mayonnaise",d:"With omega 3-6-9; with quail eggs; with 67% olive oil; Olive; Provençal Classic."},
+ {n:"Ketchup",d:"Tomato, barbecue, spicy, lecho."},
+ {n:"Soy sauce",d:"Soy sauce, sweet soy sauce."},
+ {n:"Tomato paste, fresh tomato sauce",w:"Sauce — fresh tomato only"},
+ {n:"Astoria products",se:ANY},
+ {n:"Tabasco",se:ANY},
+ {n:"Barbecue sauce Original, Hickory Smoke",se:ANY},
+ {n:"Ketchup",se:ANY},
+ {n:"Narsharab"},
+ {n:"Pasta",d:"Various shapes and sizes."},
+ {n:"Pasta",se:ANY},
+ {n:"Pasta",d:"Various shapes and sizes.",se:RR},
+ {n:"Grain mixes and soup mixes",d:'<a href="https://kosher.ru/catalog/sousy-spetsii-suhie-supy-mayonez?brands%5B%5D=154" target="_blank" rel="noopener">Full product list</a>.',se:RR},
+ {n:"Salt and sugar",d:"Without additives — considered kosher."},
+ {n:"Breakfast cereals",d:"The symbol is usually on the side of the box.",w:"Not all flavors — only marked ones"},
+ {n:"Kozinaki and halva",d:"Kozinaki: peanut, sunflower, sesame (with honey). Halva: sunflower, sunflower with peanuts; with fructose — peanut, sunflower, tahini-peanut. Any packaging."},
+ {n:"Achva halva",d:"Chocolate-vanilla, 50 g."},
+ {n:"Chocolate",se:ANY},
+ {n:"Chocolate",b:"Lubimov",se:ANY},
+ {n:"Chocolate",se:ANY},
+ {n:"Sweets and chocolate",b:"Babaevsky",d:"Belochka; original with hazelnuts and cocoa; Côte d'Ivoire and Uganda in dark chocolate; with almonds and nut cream; with orange and almonds; with prunes; with hazelnuts; elite 75% cocoa and others.",se:ANY},
+ {n:"Toblerone"},
+ {n:"Sweets and chocolate",d:"Nutella, Duplo, Ferrero Küsschen, Giotto, Hanuta, Hanuta Mini, Raffaello, Rocher, Pocket Coffee, Yogurette. Kinder: Country, Friends, Happy Hippo Cacao and Crocki, Riegel Maxi, Schoko-Bons, Schokolade, Schokolade Mini, Bueno, Chocofresh, Maxi King, Überraschung (Kinder Surprise).",w:"European-made only (Germany, Poland etc.)"},
+ {n:"Chocolate",d:"100 g: Dunkle Voll-Nuss, Edel Bitter, Espresso, Ganze Mandel, Halbbitter, Kakao Mousse, Knusperflakes, Knuspercakes, Kokos, Marzipan, Nougat, Trauben Nuss, Voll-Nuss, Weisse Voll-Nuss. 250 g: Alpenmilch, Voll-Nuss. Mini: Alpenmilch, Edel Vollmilch, Haselnuss, Joghurt, Knusper Flakes, Knusperkeks, Marzipan, Nugat.",w:"Made in Germany only"},
+ {n:"Bars",d:"Mars, Snickers, Twix, Milky Way (and their Minis), Bounty, Maltesers Maxipak.",w:"Made in the Netherlands, Poland, UK, Ireland or Germany only"},
+ {n:"Cookies",se:ANY},
+ {n:"Cookies",d:"Hit: Choco, Vanilla, Minis Cocoa, Coco, Nuts, Salted Caramel. Leibniz: Original, Minis Original, Minis Choco, Zoo Original, Zoo Cocoa.",w:"Made in Poland only"},
+ {n:"Cereal bars",se:ANY},
+ {n:"Orbit chewing gum",w:"Made in Poland only"},
+ {n:"Airwaves, Orbit, Hubba Bubba, Extra chewing gum",se:"KF logo, or a code starting with 01 or 50, or containing 1KF"},
+ {n:"Lindt chocolate — parve",d:"Excellence Dark 70%, 85%, 90%, 99%."},
+ {n:"Lindt chocolate — dairy",d:"Excellence: Dark Chilli, Dark Intense Mint, Dark Intense Orange, Dark Sea Salt, Milk Crunchy Caramel, Milk Extra Creamy, White. Lindor Bar Milk. Swiss Classic Milk and Milk Double."},
+ {n:"Ice cream",se:ANY},
+ {n:"Ice cream",b:"Brand Ice (formerly Baskin Robbins)",d:"Vanilla, chocolate, almond-pistachio.",w:"Factory packaging only"},
+ {n:"Soy dessert",d:"Chocolate, vanilla, caramel.",w:"European-made only"},
+ {n:"Plant-based milk",d:"Soy: vanilla, vanilla light, choco, choco light, banana, original, bio. Also coconut-almond, cashew, rice.",w:"European-made only"},
+ {n:"Non-dairy whipping cream"},
+ {n:"Hard cheeses: sulguni and imeruli",d:"Special kosher production. Sold during Chabad House opening hours."},
+ {n:"Cream, milk, matsoni, sour cream",d:"Whipping cream 33%, 20%. From The Oven line: milk, matsoni, sour cream."},
+ {n:"Whipping cream, butter"},
+ {n:"Matsoni, cottage cheese, milk",d:"Strained matsoni 0%, 6%. Cottage cheese 0%. Milk 2.5%, 3.2%."},
+ {n:"Butter, sour cream, cottage cheese, milk",d:"Butter 82%. Sour cream 15%, 20%. Cottage cheese 0%, 6%. Milk 2.5%, 3.2%."},
+ {n:"Cottage cheese (tvorog)",b:"Prostokvashino (Danone Russia)",d:"Confirmed as current by the Beit Din of Russia, October 2026. Fat 2%, 5%, 9%."},
+ {n:"Sour cream (smetana)",b:"Prostokvashino (Danone Russia)",d:"Confirmed as current by the Beit Din of Russia, October 2026. Classic 10%, 15%, 20%, 25%; low-fat 15%."},
+ {n:"Milk",b:"Prostokvashino (Danone Russia)",d:"Confirmed as current by the Beit Din of Russia, October 2026. Select pasteurized 3.4–6%; pasteurized 2.5%; UHT sterilized 1.5%, 2.5%, 3.2%, 3.5%, 6%."},
+ {n:"Kefir",b:"Prostokvashino (Danone Russia)",d:"Confirmed as current by the Beit Din of Russia, October 2026. Low-fat 2.5%; classic 3.2%."},
+ {n:"Argentinian beef",d:"Entrecôte No. 1."},
+ {n:"Frozen vegetables",d:"All allowed except mixes.",w:"Mixes with potatoes — only with a certificate; mixes with rice are not kosher"},
+ {n:"Dried fruit",d:"Raisins, dried apricots, dates, figs etc. without additives are kosher.",w:"Candied fruit and mixes — only with a certificate"},
+ {n:"Factory-packed nuts",d:"Without additives — usually kosher."}
+];
+
+const T = {
+ ru:{title:"Кошерные продукты в Грузии",lede:"Списки Хабада Тбилиси, Olami и Московского раввинского суда в одном месте. Начните вводить название или бренд — на русском, английском или латиницей.",ph:"Например: майонез, Sloboda, чай",qLabel:"Поиск продукта",clear:"Очистить поиск",cats:"Категории",all:"Все",
+  c:{drinks:"Напитки",alcohol:"Алкоголь и вино",hot:"Чай и кофе",oil:"Масло",fish:"Рыба",canned:"Консервы и соленья",sauces:"Соусы и варенье",dry:"Макароны, крупы, сухое",cereal:"Хлопья",sweets:"Сладости и мороженое",plant:"Растительное молоко",dairy:"Молочное",meat:"Мясо",general:"Заморозка, сухофрукты, орехи"},
+  fChabad:"Продаётся в Бейт Хабаде",fNoSeal:"Без проверки печати",found:"Найдено",
+  emptyT:"Ничего не нашлось",emptyD:"Этого продукта нет в списках. Попробуйте другое слово или бренд латиницей — или спросите в Бейт Хабаде.",
+  seal:"Проверьте печать",dairy:"Молочное",meat:"Мясное",parve:"Парве",hs:"халав стам",hn:"халав нохри",shop:"Продаётся в Бейт Хабаде",src:"Источник",srcNames:{"Хабад":"Хабад","Olami":"Olami","Московский раввинский суд":"Московский раввинский суд"},
+  rules:`<h2>Как читать пометки</h2><dl><dt>Проверьте печать</dt><dd>Продукт кошерный только с указанным знаком кашрута на упаковке. Без знака — не покупать.</dd><dt>Молочное, мясное, парве</dt><dd>Указано только там, где это написано в источнике. «Халав стам» — обычное молоко без надзора халав Исраэль; пометка стоит там, где источник это указывает.</dd><dt>Продаётся в Бейт Хабаде</dt><dd>Можно купить в Бейт Хабаде Тбилиси: ул. Бамбис Риги, 7. Вопросы: +995 551 009 655.</dd></dl>`,
+  foot:`Источники: <a href="https://chabadtbilisi.ge/en/food/57/" target="_blank" rel="noopener">Хабад Тбилиси</a> и <a href="https://olami.ge/kosher_in_georgia" target="_blank" rel="noopener">Olami Georgia</a>, <a href="https://kasher.ru/index.php?Itemid=62&amp;catid=39%3A2011-07-11-16-17-07&amp;id=64%3A2011-07-11-17-17-33&amp;option=com_content&amp;view=article" target="_blank" rel="noopener">Московский раввинский суд</a>. Списки меняются — при сомнениях уточняйте у раввина.`},
+ en:{title:"Kosher products in Georgia",lede:"The Chabad Tbilisi, Olami and Moscow Rabbinical Court lists in one place. Start typing a product or brand name — in English or Russian.",ph:"e.g. mayonnaise, Sloboda, tea",qLabel:"Search products",clear:"Clear search",cats:"Categories",all:"All",
+  c:{drinks:"Drinks",alcohol:"Alcohol and wine",hot:"Tea and coffee",oil:"Oil",fish:"Fish",canned:"Canned food and pickles",sauces:"Sauces and jams",dry:"Pasta, grains, dry goods",cereal:"Cereals",sweets:"Sweets and ice cream",plant:"Plant-based milk",dairy:"Dairy",meat:"Meat",general:"Frozen, dried fruit, nuts"},
+  fChabad:"Sold at Chabad House",fNoSeal:"No symbol check needed",found:"Found",
+  emptyT:"Nothing found",emptyD:"This product isn't on the lists. Try another word or the brand name — or ask at the Chabad House.",
+  seal:"Check for symbol",dairy:"Dairy",meat:"Meat",parve:"Parve",hs:"chalav stam",hn:"chalav nochri",shop:"Sold at Chabad House",src:"Source",srcNames:{"Хабад":"Chabad","Olami":"Olami","Московский раввинский суд":"Moscow Rabbinical Court"},
+  rules:`<h2>What the labels mean</h2><dl><dt>Check for symbol</dt><dd>The product is kosher only with the stated kashrut symbol on the package. No symbol — don't buy.</dd><dt>Dairy, meat, parve</dt><dd>Shown only where the source says so. "Chalav stam" means regular milk without chalav Yisrael supervision; it is marked where the source states it.</dd><dt>Sold at Chabad House</dt><dd>Available at Chabad House Tbilisi: 7 Bambis Rigi St. Questions: +995 551 009 655.</dd></dl>`,
+  foot:`Sources: <a href="https://chabadtbilisi.ge/en/food/57/" target="_blank" rel="noopener">Chabad of Tbilisi</a>, <a href="https://olami.ge/kosher_in_georgia" target="_blank" rel="noopener">Olami Georgia</a> and <a href="https://kasher.ru/index.php?Itemid=62&amp;catid=39%3A2011-07-11-16-17-07&amp;id=64%3A2011-07-11-17-17-33&amp;option=com_content&amp;view=article" target="_blank" rel="noopener">Moscow Rabbinical Court</a>. Lists change — when in doubt, ask a rabbi.`}
+};
+const SEAL_EN = {"любой знак кашрута":"any kashrut symbol","обязательно указание кашрута":"kashrut must be stated"};
+SEAL_EN[GRR]="Chief Rabbinate of Russia";
+P.forEach((p,i)=>{ const e=EN[i]||{};
+  p.en={n:e.n||p.n,b:e.b||p.b,d:e.d!==undefined?e.d:p.d,w:e.w!==undefined?e.w:p.warn,se:e.se||(p.seal?(SEAL_EN[p.seal]||p.seal):undefined)};
+});
+if(EN.length!==P.length) console.warn("EN length mismatch",EN.length,P.length);
+
+const STC = {dairy:"t-dairy",meat:"t-meat",parve:"t-parve"};
+let lang="ru";
+try{ const sv=localStorage.getItem("kosher-lang"); if(sv==="en"||sv==="ru") lang=sv; }catch(e){}
+let cat = "all", fChabad = false, fNoSeal = false;
+const $ = id => document.getElementById(id);
+const norm = s => (s||"").toLowerCase().replace(/ё/g,"е").replace(/<[^>]+>/g," ");
+const esc = s => s.replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+P.forEach(p => p.hay = norm([p.n,p.b,p.d,p.k,p.warn,p.seal,p.en.n,p.en.b,p.en.d,p.en.w,p.en.se].join(" ")));
+
+/* ---- fuzzy search: transliteration + phonetic skeleton + typo tolerance ---- */
+const CYR = {а:"a",б:"b",в:"v",г:"g",д:"d",е:"e",ж:"zh",з:"z",и:"i",й:"i",к:"k",л:"l",м:"m",н:"n",о:"o",п:"p",р:"r",с:"s",т:"t",у:"u",ф:"f",х:"h",ц:"ts",ч:"ch",ш:"sh",щ:"sh",ъ:"",ы:"i",ь:"",э:"e",ю:"iu",я:"ia"};
+function skel(s){
+  s = norm(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  s = s.replace(/[а-я]/g,ch=>CYR[ch]??ch);
+  s = s.replace(/[^a-z0-9\s]/g,"")
+       .replace(/kh/g,"h").replace(/ph/g,"f").replace(/ck/g,"k").replace(/q/g,"k")
+       .replace(/w/g,"v").replace(/x/g,"ks").replace(/[yj]/g,"i").replace(/c/g,"k")
+       .replace(/(.)\1+/g,"$1");
+  return s;
+}
+function osa(a,b,max){
+  const m=a.length,n=b.length; if(Math.abs(m-n)>max) return max+1;
+  let pp=null,p=Array.from({length:n+1},(_,j)=>j);
+  for(let i=1;i<=m;i++){
+    const c=[i]; let best=i;
+    for(let j=1;j<=n;j++){
+      let v=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));
+      if(pp&&i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]) v=Math.min(v,pp[j-2]+1);
+      c[j]=v; if(v<best) best=v;
+    }
+    if(best>max) return max+1;
+    pp=p; p=c;
+  }
+  return p[n];
+}
+P.forEach(p => {
+  p.sk = skel(p.hay);
+  p.tok = [...new Set(p.sk.split(/\s+/).filter(Boolean))];
+});
+function wordScore(p, w){
+  if(p.hay.includes(w)) return 3;
+  const s = skel(w); if(!s) return 3;
+  if(p.sk.includes(s)) return 2.5;
+  const L = s.length; if(L<4) return 0;
+  const max = L<=6 ? 1 : 2;
+  let best = max+1;
+  for(const t of p.tok){
+    if(t.length < L-max) continue;
+    for(const len of [L-1,L,L+1]){
+      if(len<1||len>t.length) continue;
+      const d = osa(s,t.slice(0,len),max); if(d<best) best=d;
+      if(best===0) break;
+    }
+    if(t.length>L+1){ const d=osa(s,t,max); if(d<best) best=d; }
+    if(best===0) break;
+  }
+  return best<=max ? 2 - best*0.5 : 0;
+}
+function score(p, words){
+  let total=0;
+  for(const w of words){ const s=wordScore(p,w); if(!s) return 0; total+=s; }
+  return total;
+}
+
+function hl(text, q){
+  if(!q) return esc(text);
+  const t = esc(text), nt = norm(t);
+  const i = nt.indexOf(q);
+  if(i<0) return t;
+  return t.slice(0,i)+"<mark>"+t.slice(i,i+q.length)+"</mark>"+t.slice(i+q.length);
+}
+function view(p){ return lang==="en" ? {n:p.en.n,b:p.en.b,d:p.en.d,w:p.en.w,se:p.en.se} : {n:p.n,b:p.b,d:p.d,w:p.warn,se:p.seal}; }
+
+function applyLang(){
+  const t=T[lang];
+  document.documentElement.lang=lang;
+  document.title=t.title;
+  $("t-title").textContent=t.title; $("t-lede").textContent=t.lede;
+  $("q").placeholder=t.ph; $("q").setAttribute("aria-label",t.qLabel);
+  $("clear").setAttribute("aria-label",t.clear);
+  $("chips").setAttribute("aria-label",t.cats);
+  $("fChabad").textContent=t.fChabad; $("fNoSeal").textContent=t.fNoSeal;
+  $("t-rules").innerHTML=t.rules; $("t-foot").innerHTML=t.foot;
+  document.querySelectorAll(".lang").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===lang));
+  renderChips(); render();
+}
+
+function renderChips(){
+  const t=T[lang];
+  const all = [["all",t.all],...CATS.map(id=>[id,t.c[id]])];
+  $("chips").innerHTML = all.map(([id,l])=>`<button class="chip" data-c="${id}" aria-pressed="${cat===id}">${l}</button>`).join("");
+}
+
+function render(){
+  const t=T[lang];
+  const q = norm($("q").value.trim());
+  $("clear").classList.toggle("show", !!q);
+  const words = q.split(/\s+/).filter(Boolean);
+  const res = P.filter(p =>
+    (cat==="all"||p.c===cat) &&
+    (!fChabad||p.shop) && (!fNoSeal||!p.seal) &&
+    (!words.length || (p._s = score(p,words)) > 0));
+  if(words.length){
+    const exact = res.filter(p=>p._s >= 2.5*words.length);
+    if(exact.length){ res.length=0; res.push(...exact); }
+    res.sort((a,b)=>b._s-a._s);
+  }
+  $("count").textContent = res.length ? `${t.found}: ${res.length}` : "";
+  if(!res.length){
+    $("list").innerHTML = `<div class="empty"><strong>${t.emptyT}</strong>${t.emptyD}</div>`;
+    return;
+  }
+  const first = words[0]||"";
+  $("list").innerHTML = CATS.map(id=>{
+    const items = res.filter(p=>p.c===id);
+    if(!items.length) return "";
+    return `<section class="group" id="g-${id}"><h2>${t.c[id]} <span>${items.length}</span></h2><ul class="items">${items.map(p=>{
+      const v=view(p), tags = [];
+      if(v.se) tags.push(`<span class="tag t-seal">${t.seal}: ${esc(v.se)}</span>`);
+      if(v.w) tags.push(`<span class="tag t-warn">${esc(v.w)}</span>`);
+      if(p.st) tags.push(`<span class="tag ${STC[p.st]}">${t[p.st]}${p.hs?` (${t.hs})`:p.hn?` (${t.hn})`:""}</span>`);
+      if(p.shop) tags.push(`<span class="tag t-chabad">${t.shop}</span>`);
+      return `<li><p class="name">${hl(v.n,first)}${v.b?` <span class="brand">· ${hl(v.b,first)}</span>`:""}</p>${v.d?`<p class="details">${v.d}</p>`:""}${tags.length?`<div class="tags">${tags.join("")}</div>`:""}<div class="src">${t.src}: ${p.s.map(x=>`<a href="${srcUrl(x,p)}" target="_blank" rel="noopener">${t.srcNames[x]||x}</a>`).join(", ")}</div></li>`;
+    }).join("")}</ul></section>`;
+  }).join("");
+}
+
+document.querySelector(".langs").addEventListener("click",e=>{
+  const b=e.target.closest(".lang"); if(!b) return;
+  lang=b.dataset.l; try{localStorage.setItem("kosher-lang",lang);}catch(err){}
+  applyLang();
+});
+$("chips").addEventListener("click",e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  cat = b.dataset.c; renderChips(); render();
+});
+$("q").addEventListener("input",render);
+$("clear").addEventListener("click",()=>{$("q").value="";render();$("q").focus();});
+$("fChabad").addEventListener("click",e=>{fChabad=!fChabad;e.currentTarget.setAttribute("aria-pressed",fChabad);render();});
+$("fNoSeal").addEventListener("click",e=>{fNoSeal=!fNoSeal;e.currentTarget.setAttribute("aria-pressed",fNoSeal);render();});
+applyLang();
+</script>
+</body>
+</html>
